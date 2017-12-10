@@ -1,5 +1,5 @@
-## Interleaving Strings
-##### Problem Link : [Interleaving Strings](https://hack.codingblocks.com/contests/c/1001/722)
+## Boolean Paranthesisation
+##### Problem Link : [Interleaving Strings](https://hack.codingblocks.com/contests/c/1001/1053)
 
 Let T(i, j) represents the number of ways to parenthesize the symbols between i and j (both inclusive) such that the subexpression between i and j evaluates to true.
 Let F(i, j) represents the number of ways to parenthesize the symbols between i and j (both inclusive) such that the subexpression between i and j evaluates to false.
