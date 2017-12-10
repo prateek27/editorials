@@ -1,5 +1,5 @@
-## Matrix Search
-##### Problem Link : [Matrix Search](https://hack.codingblocks.com/contests/c/1001/722)
+## Interleaving Strings
+##### Problem Link : [Interleaving Strings](https://hack.codingblocks.com/contests/c/1001/722)
 
 
 If n is the size of str1 and m be the size of str2, then for str3 to be the string formed by interleaving of str1 and str2, the last character of str3 should match the nth character of str1 or mth character of str2. 
