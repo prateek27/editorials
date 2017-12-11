@@ -6,7 +6,7 @@ Now, one can search in every row for the first element greater than or equal to 
 The **time complexity** becomes _O(q*n*log(m)*min(n,m))_.
 But if we start the linear search from the already found maximum value, the time complexity reduces by factor of _min(n,m)_.
 
-_**Time Complexity: **  O(q*n*log(m)*min(n,m))_
+_**Time Complexity: **  O((q*n*log(m))+min(n,m))_
 
 Following is the C++ code for the above approach.
 
