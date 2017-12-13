@@ -2,7 +2,7 @@
 ##### Problem Link : [Tricky Permutations](https://hack.codingblocks.com/contests/c/1001/737)  
 
 There are various ways to solve this question. However the most efficient way in terms of both space and time is presented below without the use of any advanced data structure.
-Here we have to avoid the printing of any duplicate permuatation without using any data structure like maps or stl.
+Here we have to avoid the printing of any duplicate permuatation without using any data structure like maps or set.
  Refer to the below commented code for implementation.
 
 _**Time Complexity:** O(N!)_ where N = Length of the string
