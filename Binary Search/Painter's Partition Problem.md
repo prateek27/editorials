@@ -8,7 +8,8 @@ We can definitely choose the minimum and maximum time needed to be 0 and INT_MAX
 
 Refer the below commented code to see the implementation details. 
 
-_**Time Complexity:** O()_
+
+_**Time Complexity:** O(log T * max(Number of painters,Number of fences))_ where T = maximum time needed to paint all the fences (INT_MAX here).
 
 ```C++
 #include<bits/stdc++.h>
