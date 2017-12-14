@@ -5,7 +5,7 @@ This is an advanced DP problem. However once understood the logic, the coding be
 The most important thing is to understand the states of the DP. Here we are considering `4-D DP`.
 `dp[i][j][k][flag]` represents the answer till the i<sup>th</sup> and j<sup>th</sup> index of the two strings for `k` subsequences remaining and flag represents if the last character from both the strings has been chosen or not to be a part of some subsequence or not.
 
-Now we have three options.
+Now we have two options.
 >**Option 1:** Start a new subsequence irrespective of the fact if `str1[i]`==`str2[j]` or not by choosing for `(str1[i] and str2[j+1])` or `(str1[i+1] and str2[j])` and then taking the maximum of the lengths of the two.
 
 >**Option 2:** If `str1[i]==str2[j]`, we have the option to start a new subsequence or continue with the previous subsequence provided the flag is set. 
