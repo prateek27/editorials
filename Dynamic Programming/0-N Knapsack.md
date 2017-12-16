@@ -49,6 +49,7 @@ int main(){
 	
 	return 0;
 }
+```
 
 =======
 ## 0-N Knapsack
@@ -102,5 +103,4 @@ int main(){
 	return 0;
 }
 
->>>>>>> 36aa99358e08dac2823281c618c877bd84d94805
 ```
