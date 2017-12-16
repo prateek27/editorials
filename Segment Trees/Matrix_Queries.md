@@ -1,84 +1,101 @@
-## Matrix Queries - HackerBlocks
+## Problem Name : Matrix Queries-I
 
-Refer tutorial for explanation.
+### Topic : Segment Trees
 
-```C++
-#include<iostream>
-#include<cstdio>
-#include<climits>
+#### Difficulty : Medium
+
+### EXPLANATION
+
+Since the matrices may not be invertible, we cannot store prefix products for range queries. Thus we need a data structure. We can use segment tree for range queries. Each input matrix is stored leaf nodes of the tree. Combining two nodes can be done like :-<br>
+
+$$Val_{node}$$ = $$Val_{node->left}*Val_{node->right}$$ mod $$r$$. Where $$Val_{node}$$ is a 2*2 matrix.
+
+#### Time Complexity : O($$sqrt(K)$$)(Approx).
+
+```c++
+#include <bits/stdc++.h>
+#define nn 100100
+#define ll long long int
+#define inf 1000000000000000000ll
+ 
 using namespace std;
-#define MAX 54000
-#define INT_MIN -22121
 
-struct treeNode{
-    int prefixSum;
-    int suffixSum;
-    int sum;
-    int maxSum;
-};
+int t[nn<<2][2][2],a[nn][2][2];
+int n,r,q;
 
-int arr[MAX+1];
-treeNode tree[3*MAX+1];
-
-void makeSegmentTree(int idx,int ss,int se){
-if(ss==se){
-    tree[idx]=((treeNode){arr[ss],arr[ss],arr[ss],arr[ss]});
-
-    }
-
-else{
-    int mid=(ss+se)/2;
-    makeSegmentTree(idx*2+1,ss,mid);
-    makeSegmentTree(idx*2+2,mid+1,se);
-
-    treeNode left = tree[idx*2+1];
-    treeNode right = tree[idx*2+2];
-
-    tree[idx].prefixSum = max(left.prefixSum , left.sum+right.prefixSum);
-    tree[idx].suffixSum = max(right.suffixSum, left.suffixSum+right.sum);
-    tree[idx].sum       = left.sum + right.sum;
-    tree[idx].maxSum    = max(left.suffixSum+right.prefixSum,max(left.maxSum,right.maxSum));
-    }
+void multiply(int a[2][2],int b[2][2],int r[2][2]) // r=a*b
+{
+    r[0][0]=(a[0][0]*b[0][0]+a[0][1]*b[1][0])%r;
+    r[0][1]=(a[0][0]*b[0][1]+a[0][1]*b[1][1])%r;
+    r[1][0]=(a[1][0]*b[0][0]+a[1][1]*b[1][0])%r;
+    r[1][1]=(a[1][0]*b[0][1]+a[1][1]*b[1][1])%r;
 }
 
-
-treeNode maxSumQuery(int idx,int ss,int se,int qs,int qe){
-
-        if(ss>=qs&&se<=qe)
-            {  return tree[idx];}
-         if(qs>se||qe<ss)
-        return ((treeNode){INT_MIN,INT_MIN,INT_MIN,INT_MIN});
-
-        int mid = (ss+se)/2;
-
-        treeNode left = maxSumQuery(2*idx+1,ss,mid,qs,qe);
-        treeNode right = maxSumQuery(2*idx+2,mid+1,se,qs,qe);
-        treeNode temp;
-
-        temp.prefixSum = max(left.prefixSum,left.sum+right.prefixSum);
-        temp.suffixSum = max(right.suffixSum,right.sum+left.suffixSum);
-        temp.sum       = left.sum + right.sum;
-        temp.maxSum    = max(left.suffixSum+right.prefixSum,max(left.maxSum,right.maxSum));
-
-        return temp;
+void build(int node,int st,int en)
+{
+    if(st==en)
+    {
+        for(int i=0;i<2;i++)
+            for(int j=0;j<2;j++)
+                t[node][i][j]=a[st][i][j];
+        return;
+    }
+    int mid=st+en>>1;
+    build(node*2+1,st,mid);
+    build(node*2+2,mid+1,en);
+    multiply(t[node*2+1],t[node*2+2],t[node]);
 }
 
-int main(){
-int n,q,t,x,y,i;
-scanf("%d",&n);
-    for(i=0;i<n;i++)
-        scanf("%d",&arr[i]);
+void query(int node,int st,int en,int l,int r,int res[2][2])
+{
+    if(st>en || l>en || st>r)
+        return;
+    if(l<=st && en<=r)
+    {
+        for(int i=0;i<2;i++)
+            for(int j=0;j<2;j++)
+                res[i][j]=t[node][i][j];
+        return;
+    }
+    int mid=st+en>>1;
+    int r1[2][2]={{1,0},{0,1}},r2[2][2]={{1,0},{0,1}};
+    query(node*2+1,st,mid,l,r,r1);
+    query(node*2+2,mid+1,en,l,r,r2);
+    multiply(r1,r2,res);
+}
 
-        makeSegmentTree(0,0,n-1);
-
-
-        scanf("%d",&q);
-        while(q--){
-        scanf("%d%d",&x,&y);
-        printf("%d\n",maxSumQuery(0,0,n-1,x-1,y-1).maxSum);
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin>>r>>n>>q;
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<2;j++)
+        {
+            for(int k=0;k<2;k++)
+            {
+                cin>>a[i][j][k];
+            }
         }
-
-return 0;
+    }
+    build(0,0,n-1); //initializing segment tree
+    while(q--)
+    {
+        int u,v;
+        cin>>u>>v;
+        u--,v--;
+        int res[2][2]={{1,0},{0,1}};
+        query(0,0,n-1,u,v,res); //querying in segment tree
+        for(int j=0;j<2;j++)
+        {
+            for(int k=0;k<2;k++)
+            {
+                cout<<res[j][k]<<' ';
+            }
+            cout<<endl;
+        }
+        cout<<endl;
+    }
+    return 0;
 }
-
 ```
