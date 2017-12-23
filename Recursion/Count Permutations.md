@@ -3,7 +3,7 @@
 
 For every element in the string, swap it with itself and all the other elements in the string. And store all these strings formed in a set to avoid redundancies. Eventually use a for-each loop to print the set elements. Best part is that the set itself stores all the strings lexicographically.
 
-_**Time Complexity:** O(N<sup>N</sup>)_ where N = String Length.
+_**Time Complexity:** O(N!)_ where N = String Length.
 
 Read below commented code for implementation details.
 ```C++
