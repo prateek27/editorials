@@ -5,7 +5,7 @@ All the outputs from the question "Smart Keypad - I" are stored in a vector v.
 
 For each name in searchIn[], for each generated string from vector v, if string is in name, the name is printed.
 
-_**Time Complexity:** O(l<sup>N</sup> * M)_ where N = Number of strings in table[], l = Length of string in table, and M = Number of strings in searchIn[].
+_**Time Complexity:** O(l<sup>N</sup> * M * O(find() method in STL))_ where N = Number of strings in table[], l = Length of string in table, and M = Number of strings in searchIn[].
 
 Read below commented code for implementation details.
 ```C++
