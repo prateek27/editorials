@@ -54,7 +54,7 @@ int main() {
 			minend = temp * a[i];
 		}
 		// if product is smaller than maxend, update product to maxend.
-		if (product < maxend) prod = maxend;
+		if (product < maxend) product = maxend;
 	}
 
 	// Print the product to stdout.
