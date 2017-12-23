@@ -5,7 +5,7 @@ Basically, we need to take a letter from those strings in table whose indices ar
 
 We start with and empty string and recursively add one letter from each string whose indices are given in the input string.
 
-_**Time Complexity:** O(l<sup>N</sup>)_ where N = Number of strings in table[], and l = Length of string in table.
+_**Time Complexity:** O(l<sup>N</sup>)_ where N = Number of strings in table[], and l = Average length of string in table.
 
 Read below commented code for implementation details.
 ```C++
