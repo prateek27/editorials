@@ -30,7 +30,7 @@ Then we have:
 
 If t'< 0, then dp(i,t) = dp(i-1,t).
 
-If t'= 0, then dp(i,t) = max{A(i-1,t),dp(i-1,t')+rewardi}.
+If t'>=0, then dp(i,t) = max{A(i-1,t),dp(i-1,t')+rewardi}.
 
 _**Time Complexity:** O(N*T)_ where N is the number of jobs and T is the total time units.
 
