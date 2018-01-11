@@ -8,20 +8,28 @@ jobs according to deadline, so that d1<= d2<= · · ·<=dn = d, where d is the l
 
 We can prove this by taking few examples.
 For Example -Let there be 2 jobs with following description
+
 Reward   - 2	100
+
 Time     - 6	5
+
 Deadline - 11   5
 
 Now we have to tell the maximum bounties that can be earned in 11 units of time.
 If we do not sort the jobs by deadline,then maximum profit we can get is 100 by doing job2 and skipping job1.
 However if we sort the jobs according to the deadlines,then we can get a mximum profit of 102.
 
-DP RECURRENCE:Let dp(i,t) represent maximum bounties obtaind from a feasible schedule in which only jobs from {1,...,i} are scheduled,and all scheduled jobs finish by time t}.
-	• dp(0,t) = 0 for all t, 0 = t = T.
-	• Let 1 = i = n, 0 = t = T. Define t'= min{t, di} - ti.Clearly t' is the latest possible
-	time that we can schedule job i, so that it ends both by its deadline and by time t.
-	Then we have:
+DP RECURRENCE:Let dp(i,t) represent maximum bounties obtaind from a feasible schedule in which only jobs from {1,...,i} are scheduled,and all scheduled jobs finish by time t.
+
+• dp(0,t) = 0 for all t, 0<=t<=T
+
+• Let 1<=i<=n, 0<=t<=T. Define t'= min{t, di} - ti.Clearly t' is the latest possible
+time that we can schedule job i, so that it ends both by its deadline and by time t.
+
+Then we have:
+
 If t'< 0, then dp(i,t) = dp(i-1,t).
+
 If t'= 0, then dp(i,t) = max{A(i-1,t),dp(i-1,t')+rewardi}.
 
 _**Time Complexity:** O(N*T)_ where N is the number of jobs and T is the total time units.
