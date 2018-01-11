@@ -4,7 +4,7 @@ Here The problem would have been fairly easy if there were no deadlines assoscia
 But the deadlines in this question makes our task a little difficult.
 
 CLAIM:Before beginning the main part of our dynamic programming algorithm, we will sort the
-jobs according to deadline, so that d1 = d2 = · · · = dn = d, where d is the largest deadline.
+jobs according to deadline, so that d1<= d2<= · · ·<=dn = d, where d is the largest deadline.
 
 We can prove this by taking few examples.
 For Example -Let there be 2 jobs with following description
