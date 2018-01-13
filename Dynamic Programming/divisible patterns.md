@@ -1,7 +1,7 @@
 ﻿## Divisible Patterns
 ##### Problem Link :[Divisible Patterns](https://hack.codingblocks.com/contests/c/141/1001)
 
-##PreRequisite:Z-Algorithm
+## PreRequisite:Z-Algorithm
 Once we find the set of indexes using Z-algorithm,then approaching the problem further seems quite easy.It seems just a variation of the following problem: Find out the number of ways to choose some numbers from the arr A such that the sum of chosen numbers is divisible by all the numbers from 1 to 9 modulo 10^9+7.
 How to approach this problem?
 Let dp[i][j] represent number of ways such that we get modulo sum as j by considering numbers from indexes 1 to i
@@ -17,13 +17,13 @@ dp[i][j]=dp[i-1][j]+dp[i-1][(j/arr[i])%M];
 This recurrnce is correct but is not possible to calculate it,because inverse may not always exist.
 
 ##How to approach original problem..?
-We can see that LCM of all numbers from 1..9 is 2520=(2*2*2)*(3*3)*(5)*(7)
+We can see that LCM of all numbers from 1..9 is 2520=(2 * 2 * 2) * (3 * 3) * (5) * (7)
 Any number divisible by 2520 should have atleast 3 two,2 three,1 five, 1 seven.
 Therefore we can mantain dp[end][two][three][five][seven];
 Since we only want to know ways to form numbers which are divisible by 2520,hence the dimensions of our Dp will be 2*4*3*2*2
 The rest is easy to understand from code.Note:"end" dimension is used to distinguish betweeen number of ways until previous element with number of ways until current element.
 
-_**Time Complexity:** O(N*4*3*2*2)_
+_**Time Complexity:** O(N * 4 * 3 * 2 * 2)_
 
 ```C++
 # include <iostream>
