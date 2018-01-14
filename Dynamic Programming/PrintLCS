@@ -1,0 +1,53 @@
+//Although solution to this problem is available in geeksforgeeks...This solution is a bit diffrent from that.
+
+
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int main()
+{
+   
+    char A[1002];
+    char B[1002];
+    cin>>A>>B;
+    int a=strlen(A);
+    int b=strlen(B);
+    
+    //Now here I have created two 2D arrays. One stores value of LCS and other stores the string.
+    vector< vector < string > > dp(a+1,vector< string >(b+1)); //dp[i][j] returns LCS in form of string
+    vector< vector < ll > > ldp(a+1,vector<ll>(b+1)); //ldp[i][j] returns length of LCS till  ith index of string 1 and jth index of string 2
+    
+    // Below function is exactly same as when we calculate length of lcs. But here we are going to store the actual string value also.
+    for(int i=0; i<=a; i++)
+    {
+        for(int j=0; j<=b; j++)
+        {
+          
+            if(i==0||j==0) //Base cases
+            {
+                dp[i][j]="";
+                ldp[i][j]=0;
+            }
+            else if(A[i-1]==B[j-1])  
+            {
+                ldp[i][j]=1+ldp[i-1][j-1];
+                dp[i][j]=dp[i-1][j-1]+A[i-1];  //Self explanatory.
+            }
+            else
+            {
+                if(ldp[i-1][j]>ldp[i][j-1])     
+                {
+                    ldp[i][j]=ldp[i-1][j];
+                    dp[i][j]=dp[i-1][j];
+                }
+                else
+                {
+                    ldp[i][j]=ldp[i][j-1];
+                    dp[i][j]=dp[i][j-1];
+                }
+            }
+        }
+    }
+    cout<<dp[a][b];
+    return 0;
+}
