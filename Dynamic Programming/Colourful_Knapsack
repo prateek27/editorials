@@ -1,0 +1,68 @@
+//In this problem we simply have to calculate the maximum weight the bag can hold of each colour such that its less than 
+//total capacity of knapsack(which is pretty obvious). So now our problem is fairly simple. We just have to calculate the maximum
+//weight by taking stones each of one colour and with an upper limit of W. Ive used DP+Memoization and the code is really simple
+//to understand.
+
+
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ll knapsack(ll c,ll w,vector<vector<ll>> &color,vector<vector<ll>> &dp,ll M,ll W)
+{
+    //c=color, w=current weight, M = total colors, W = capacity.
+    if(w>W) //We simply cannot have weight more than capacity..so return INT_MIN.
+    {
+        return INT_MIN;
+    }
+    if(c==M) //Now we have used up all colors.
+    {
+        dp[c][w]=w;
+        return w;
+        //return dp[c-1][w];
+    }
+    if(dp[c][w]) //Memoization step.
+    {
+        return dp[c][w];
+    }
+    ll k=color[c].size();
+    //Recursive step.
+    ll MaxAns=INT_MIN;
+    for(ll i=0;i<k;i++) //Take every stone of color c and then pass on to next color.
+    {
+        ll op=knapsack(c+1,w+color[c][i],color,dp,M,W);
+        MaxAns=max(MaxAns,op);
+    }
+    dp[c][w]=MaxAns;
+    return MaxAns;
+}
+int main()
+{
+    ll N,M,W;
+    cin>>N>>M>>W;
+    vector<ll> Weights(N+1);
+    vector<vector<ll>> color(M+1);
+    for(ll i=0;i<N;i++)
+    {
+        cin>>Weights[i];
+    }
+    //Color is a 2D array, where color[m][i] stores ith stone of colour m.
+    for(ll i=0;i<N;i++)
+    {
+        ll c;
+        cin>>c;
+        c--;
+        color[c].push_back(Weights[i]);
+    }
+    
+    vector<vector<ll>> dp(M+1,vector<ll>(W+1,0));
+    
+    ll ans=knapsack(0,0,color,dp,M,W); //Calculates value of maximum weight <=W (capacity)
+    
+    if(ans==-2147483648) //If answer is -INF, it means its impossible to fill knapsack with stones of each colour.
+    {
+        cout<<-1<<endl;
+        return 0;
+    }
+    cout<<(W-ans)<<endl;  //In problem we need to print capacity left.
+    return 0;
+}
