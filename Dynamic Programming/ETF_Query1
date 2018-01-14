@@ -1,0 +1,70 @@
+//Solving queries using prefix sum.
+
+
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int main()
+{
+
+//Tot[] stores value of Totient(n) for numbers upto 10^6. To calculate you just have to modify sieve function a bit.
+
+    ll N=1000000; 
+    vector<bool> v(N+1,0); //v[] is a boolean array, if v[i]=false then i is prime.
+    vector<ll> Tot(N+1); //Tot[]
+    Tot[0]=0; 
+    Tot[1]=1;
+   
+   // Now totient function is defined as totient(n) = n(1-1/p1)(1-1/p2)....where p1,p2..are prime factors.
+   // it is same as (n(p1-1)(p2-1)(p3-1)...(pk-1))/(p1*p2*p3..pk)
+    for(ll i=2;i<=N;i++)
+    {
+        Tot[i]=i; //initially all values of tot[i]=i.
+    }
+    
+    //This is the most important part for solving the question. This is modified sieve function. Dont get confused as in
+    //my sieve function if v[i]==true then it means composite..you can do anyway.
+    for(ll i=2;i<=N;i++)
+    {
+        if(v[i]==0) //If i is prime 
+        {
+            for(ll j=2*i;j<=N;j=j+i)
+            {
+                Tot[j]=Tot[j]/i;  //this way prime factor p gets divided for tot(j). Refer above for explanation.
+                Tot[j]=Tot[j]*(i-1); //this way (p-1) gets multiplied.
+                v[j]=1; //Same as we do in sieve, marking this number not prime.
+            }
+        }
+    }
+    //After above step all the composite numbers have their respective Totient value except for prime numbers. Now simply
+    // for a prime number Tot(n)=n-1. So this step calculates value for prime numbers.
+    for(ll i=2;i<=N;i++)
+    {
+        if(v[i]==0)
+        {
+            Tot[i]=i-1;
+        }
+    }
+    
+    //Now comes the part to solve the problem. We use prefix sum logic to solve this problem.
+    // Tot[r]-Tot[l-1] will give sum of totient func from l to r.
+    for(ll i=1;i<=N;i++)
+    {
+        Tot[i]+=Tot[i-1];
+    }
+   
+    ll q;
+    cin>>q;
+    while(q--)
+    {
+        ll l,r;
+        cin>>l>>r;
+        ll ans=Tot[r]-Tot[l-1];
+        cout<<ans<<endl;
+    }
+    
+    //Im leaving the complexity analysis as an exercise for you.
+    // Although this method can pass....You can also solve it using Segment trees and BIT, same will pass too. Sieve 
+    //step will remain same.
+    return 0;
+}
