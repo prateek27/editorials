@@ -51,7 +51,9 @@ int findMinPages(int *books,int n,int k){
 	int ans = INT_MAX;
 
 	while(s<=e){
-		mid = (s+e)/2;
+		//Mid should be considered like this in order to avoid Integer overflow that can be caused.
+		// If both s and e are INT_MAX. If we take mid = (s+e)/2 , this will cause overflow and give WA.
+		mid = s + (e-s)/2;
 
 		if(isValid(books,n,k,mid)){
 			ans = 
