@@ -82,10 +82,14 @@ int main()
     ll ans=1e18;
 
     while(lo<=hi){
+    /*
       ll mid=lo+hi;
       mid>>=1;
       // if it is possible to cook the paranthas in "mid" units of time, then use it for computing the ans and 
       // again start trying for smaller values by reducing hi to mid-1
+      
+      */
+      ll min = lo + (hi-lo)/2; //Avoids the overflow.
       if(isPossible(ran,mid,par)){
         ans=min(ans,mid);
         hi=mid-1;
